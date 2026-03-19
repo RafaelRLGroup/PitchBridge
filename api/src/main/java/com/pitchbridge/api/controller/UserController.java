@@ -3,6 +3,9 @@ package com.pitchbridge.api.controller;
 import com.pitchbridge.api.dto.UserResponseDTO;
 import com.pitchbridge.api.model.User;
 import com.pitchbridge.api.service.UserService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +38,7 @@ public class UserController {
 
     // 3. Criar Usuário (Retornando 201 Created)
     @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody User user) {
+    public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody User user) {
         User savedUser = userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(new UserResponseDTO(savedUser));
     }

@@ -26,7 +26,7 @@ public class User {
     private String name;
 
     @Email(message = "Manda um e-mail válido aí!")
-    @NotBlank
+    @NotBlank(message = "O e-mail não pode estar vazio.")
     @Column(unique = true) // Garante que não existam dois usuários com o mesmo e-mail
     private String email;
 

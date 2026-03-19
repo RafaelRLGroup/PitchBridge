@@ -1,6 +1,8 @@
 package com.pitchbridge.api.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull; // <-- Faltava esse cara!
 import lombok.Data;
 import java.math.BigDecimal;
 
@@ -11,7 +13,10 @@ public class Contribution {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "O valor da doação é obrigatório!")
+    @DecimalMin(value = "1.00", message = "A doação mínima é de R$ 1,00, vamos ajudar né?")
     private BigDecimal amount;
+
     private boolean anonymous;
 
     @ManyToOne
@@ -20,5 +25,5 @@ public class Contribution {
 
     @ManyToOne
     @JoinColumn(name = "dream_id")
-    private User dream; // Por enquanto vamos deixar como User só para o erro sumir, depois ajustamos
+    private Dream dream; // <-- Trocamos 'User' por 'Dream' de vez!
 }
