@@ -1,10 +1,8 @@
 package com.pitchbridge.api.controller;
 
+import com.pitchbridge.api.dto.ContributionResponseDTO;
 import com.pitchbridge.api.model.Contribution;
 import com.pitchbridge.api.service.ContributionService;
-
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +18,14 @@ public class ContributionController {
     private ContributionService contributionService;
 
     @PostMapping
-    public ResponseEntity<Contribution> postContribution(@Valid @RequestBody Contribution contribution) {
+    public ResponseEntity<Contribution> postContribution(@RequestBody Contribution contribution) {
         // O Service vai fazer a mágica de validar e somar no sonho
         Contribution saved = contributionService.createContribution(contribution);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @GetMapping("/dream/{dreamId}")
-    public ResponseEntity<List<Contribution>> getByDream(@PathVariable Long dreamId) {
-        return ResponseEntity.ok(contributionService.findByDream(dreamId));
-    }
+    public ResponseEntity<List<ContributionResponseDTO>> getByDream(@PathVariable Long dreamId) {
+    return ResponseEntity.ok(contributionService.findByDream(dreamId));
+}
 }

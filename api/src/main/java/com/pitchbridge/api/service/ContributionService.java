@@ -1,5 +1,6 @@
 package com.pitchbridge.api.service;
 
+import com.pitchbridge.api.dto.ContributionResponseDTO;
 import com.pitchbridge.api.model.Contribution;
 import com.pitchbridge.api.model.Dream;
 import com.pitchbridge.api.repository.ContributionRepository;
@@ -41,8 +42,10 @@ public class ContributionService {
         return contributionRepository.save(contribution);
     }
 
-    public List<Contribution> findByDream(Long dreamId) {
-        // Futuro: Filtrar contribuições de um sonho específico
-        return contributionRepository.findAll();
-    }
+    public List<ContributionResponseDTO> findByDream(Long dreamId) {
+    return contributionRepository.findByDreamId(dreamId)
+            .stream()
+            .map(ContributionResponseDTO::new)
+            .toList();
+}
 }
