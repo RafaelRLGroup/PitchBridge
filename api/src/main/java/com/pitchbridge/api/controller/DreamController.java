@@ -19,16 +19,23 @@ public class DreamController {
 
     @GetMapping
     public ResponseEntity<List<DreamResponseDTO>> getAllDreams() {
-        List<DreamResponseDTO> dtos = dreamService.findAll()
-                .stream()
-                .map(DreamResponseDTO::new)
-                .collect(Collectors.toList());
+        // O Service já entrega a lista de DTOs prontinha!
+        List<DreamResponseDTO> dtos = dreamService.findAll();
         return ResponseEntity.ok(dtos);
     }
 
     @PostMapping
     public ResponseEntity<DreamResponseDTO> createDream(@RequestBody Dream dream) {
-        Dream savedDream = dreamService.save(dream);
-        return ResponseEntity.ok(new DreamResponseDTO(savedDream));
+        // O Service agora já devolve o DTO prontinho!
+        return ResponseEntity.ok(dreamService.save(dream));
+}
+    @GetMapping("/search")
+    public ResponseEntity<List<DreamResponseDTO>> search(@RequestParam String title) {
+        return ResponseEntity.ok(dreamService.searchByTitle(title));
+    }
+
+    @GetMapping("/trending")
+    public ResponseEntity<List<DreamResponseDTO>> getTrending() {
+        return ResponseEntity.ok(dreamService.getTrendingDreams());
     }
 }

@@ -3,9 +3,13 @@ package com.pitchbridge.api.repository;
 import com.pitchbridge.api.model.Dream;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository
 public interface DreamRepository extends JpaRepository<Dream, Long> {
-    // No futuro, podemos criar métodos customizados aqui,
-    // tipo: findByTitleContaining(String keyword)
+// Busca sonhos que contenham a palavra no título (Case Insensitive)
+    List<Dream> findByTitleContainingIgnoreCase(String title);
+
+    // Busca os sonhos que já arrecadaram algo, ordenados pelo que tem mais dinheiro
+    List<Dream> findTop5ByOrderByCurrentAmountDesc();
 }

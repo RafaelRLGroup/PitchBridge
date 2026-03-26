@@ -5,8 +5,13 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull; // <-- Faltava esse cara!
 import lombok.Data;
 import java.math.BigDecimal;
+import java.time.Instant;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Data
 public class Contribution {
     @Id
@@ -26,4 +31,9 @@ public class Contribution {
     @ManyToOne
     @JoinColumn(name = "dream_id")
     private Dream dream; // <-- Trocamos 'User' por 'Dream' de vez!
+
+    // Importante: Importar de jakarta.persistence
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
 }

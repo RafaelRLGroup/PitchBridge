@@ -4,6 +4,7 @@ import com.pitchbridge.api.model.Dream;
 import lombok.Getter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Instant;
 
 @Getter
 public class DreamResponseDTO {
@@ -13,28 +14,35 @@ public class DreamResponseDTO {
     private BigDecimal goalValue;
     private BigDecimal currentAmount;
     private String creatorName;
-
-    // Novos campos "Inteligentes"
     private Integer contributionCount;
     private BigDecimal percentageReached;
+    private Instant createdAt;
 
     public DreamResponseDTO(Dream dream) {
+        // 1. Atribuições Básicas
         this.id = dream.getId();
         this.title = dream.getTitle();
         this.description = dream.getDescription();
         this.goalValue = dream.getGoalValue();
-        this.currentAmount = dream.getCurrentAmount();
-        this.creatorName = dream.getCreator() != null ? dream.getCreator().getName() : "Anônimo";
+        this.createdAt = dream.getCreatedAt();
 
-        // 1. Pega a quantidade de contribuições da lista da entidade
-        // (Certifique-se que você tem a List<Contribution> na sua entidade Dream)
+        // 2. O PULO DO GATO: Tratamento de NULL
+        // Se o sonho é novo e o banco devolver null no currentAmount,
+        // a gente usa BigDecimal.ZERO para não quebrar a conta abaixo.
+        this.currentAmount = (dream.getCurrentAmount() != null) ? dream.getCurrentAmount() : BigDecimal.ZERO;
+
+        // 3. Nome do Criador
+        this.creatorName = (dream.getCreator() != null) ? dream.getCreator().getName() : "Anônimo";
+
+        // 4. Contagem de doações (Tamanho da lista)
         this.contributionCount = (dream.getContributions() != null) ? dream.getContributions().size() : 0;
 
-        // 2. Cálculo da Porcentagem: (Atual / Meta) * 100
-        if (dream.getGoalValue() != null && dream.getGoalValue().compareTo(BigDecimal.ZERO) > 0) {
-            this.percentageReached = dream.getCurrentAmount()
+        // 5. CÁLCULO DA PORCENTAGEM
+        // Usamos o 'this.currentAmount' que já garantimos lá em cima que não é nulo.
+        if (this.goalValue != null && this.goalValue.compareTo(BigDecimal.ZERO) > 0) {
+            this.percentageReached = this.currentAmount
                     .multiply(new BigDecimal("100"))
-                    .divide(dream.getGoalValue(), 2, RoundingMode.HALF_UP);
+                    .divide(this.goalValue, 2, RoundingMode.HALF_UP);
         } else {
             this.percentageReached = BigDecimal.ZERO;
         }
