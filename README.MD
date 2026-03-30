@@ -53,21 +53,52 @@ O projeto nasceu da necessidade real de organizar as vaquinhas do escritório, e
 ## 🧪 Guia de Testes (Exemplos de Body)
 
 ### 1. Criar Usuário (POST `/users`)
+
 ```json
 {
   "name": "Adalbelto Carlos",
   "email": "adalbelto@email.com",
   "password": "senha123456"
 }
+```
+
+### 2. Criar um Sonho (POST `/dreams`)
+
+```json
 {
   "title": "Chácara do seu Zé",
   "description": "Um refúgio para apreciar uma coquinha gelada.",
   "goalValue": 50000.00,
   "creator": { "id": 1 }
 }
+```
+
+### 3. Realizar Doação (POST `/contributions`)
+
+```json
 {
   "amount": 150.00,
   "anonymous": false,
   "dream": { "id": 1 },
   "donor": { "id": 2 }
 }
+```
+
+---
+
+## 🚀 Como Executar
+
+1. Clone o repositório.
+2. Configure o banco PostgreSQL no `application.properties`.
+3. Certifique-se de que a coluna `created_at` está presente ou use `ddl-auto=update`.
+4. Execute o comando:
+   ```bash
+   ./mvnw clean compile spring-boot:run
+   ```
+5. Acesse a API em `http://localhost:8080`.
+
+---
+
+## 👤 Autor
+**Rafael** / [@RafaelRLGroup](https://github.com/RafaelRLGroup)
+*"Codando até o 'zoio' fechar e o sorvete de pistache acabar."* 🍦🚀
