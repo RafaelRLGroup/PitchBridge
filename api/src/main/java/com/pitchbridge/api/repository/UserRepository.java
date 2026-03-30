@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     // Aqui o Spring Data faz a mágica: ele já te dá save(), findAll(), findById(), delete()...
-    // Tudo de graça, sem você escrever uma linha de código!
+boolean existsByEmail(String email);    // Tudo de graça, sem você escrever uma linha de código!
 }
+

@@ -1,6 +1,7 @@
 package com.pitchbridge.api.service;
 
 import com.pitchbridge.api.dto.ContributionResponseDTO;
+import com.pitchbridge.api.dto.UserRankingDTO;
 import com.pitchbridge.api.model.Contribution;
 import com.pitchbridge.api.model.Dream;
 import com.pitchbridge.api.repository.ContributionRepository;
@@ -47,5 +48,8 @@ public class ContributionService {
             .stream()
             .map(ContributionResponseDTO::new)
             .toList();
+}
+    public List<UserRankingDTO> getRanking() {
+    return contributionRepository.getTopDonors();
 }
 }

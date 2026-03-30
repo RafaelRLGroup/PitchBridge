@@ -1,6 +1,7 @@
 package com.pitchbridge.api.controller;
 
 import com.pitchbridge.api.dto.DreamResponseDTO;
+import com.pitchbridge.api.dto.PlatformReportDTO;
 import com.pitchbridge.api.model.Dream;
 import com.pitchbridge.api.service.DreamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,9 @@ public class DreamController {
     public ResponseEntity<List<DreamResponseDTO>> getTrending() {
         return ResponseEntity.ok(dreamService.getTrendingDreams());
     }
+
+    @GetMapping("/stats")
+    public ResponseEntity<PlatformReportDTO> getStats() {
+        return ResponseEntity.ok(dreamService.getPlatformReport());
+}
 }

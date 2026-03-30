@@ -1,8 +1,10 @@
 package com.pitchbridge.api.service;
 
 import com.pitchbridge.api.dto.DreamResponseDTO;
+import com.pitchbridge.api.dto.PlatformReportDTO;
 import com.pitchbridge.api.model.Dream;
 import com.pitchbridge.api.model.User;
+import com.pitchbridge.api.repository.ContributionRepository;
 import com.pitchbridge.api.repository.DreamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,21 @@ public class DreamService {
 
     @Autowired
     private UserService userService; // Injetamos o UserService para validar o criador
+
+    // No DreamService.java
+    @Autowired
+    private ContributionRepository contributionRepository; // Precisamos dele para contar doações
+
+    public PlatformReportDTO getPlatformReport() {
+        Long totalDreams = dreamRepository.count();
+        Long totalContributions = contributionRepository.count();
+        BigDecimal totalArrecadado = dreamRepository.sumAllCurrentAmounts();
+
+        // Tratamento para não vir null se o banco estiver vazio
+        if (totalArrecadado == null) totalArrecadado = BigDecimal.ZERO;
+
+        return new PlatformReportDTO(totalDreams, totalContributions, totalArrecadado);
+    }
 
     @Transactional(readOnly = true)
     public List<DreamResponseDTO> findAll() {

@@ -39,8 +39,10 @@ public class UserController {
     // 3. Criar Usuário (Retornando 201 Created)
     @PostMapping
     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody User user) {
-        User savedUser = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new UserResponseDTO(savedUser));
+        // Agora o save já devolve o DTO pronto!
+        UserResponseDTO savedUserDto = userService.save(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUserDto);
     }
 
     // 4. Atualizar Usuário

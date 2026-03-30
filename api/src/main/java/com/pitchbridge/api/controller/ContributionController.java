@@ -1,6 +1,7 @@
 package com.pitchbridge.api.controller;
 
 import com.pitchbridge.api.dto.ContributionResponseDTO;
+import com.pitchbridge.api.dto.UserRankingDTO;
 import com.pitchbridge.api.model.Contribution;
 import com.pitchbridge.api.service.ContributionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class ContributionController {
     @GetMapping("/dream/{dreamId}")
     public ResponseEntity<List<ContributionResponseDTO>> getByDream(@PathVariable Long dreamId) {
     return ResponseEntity.ok(contributionService.findByDream(dreamId));
+}
+    @GetMapping("/ranking")
+    public ResponseEntity<List<UserRankingDTO>> getRanking() {
+    return ResponseEntity.ok(contributionService.getRanking());
 }
 }
