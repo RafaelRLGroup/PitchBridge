@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
+import com.pitchbridge.api.model.Category;
 
 @Getter
 public class DreamResponseDTO {
@@ -17,6 +18,7 @@ public class DreamResponseDTO {
     private Integer contributionCount;
     private BigDecimal percentageReached;
     private Instant createdAt;
+    private Category category;
 
     public DreamResponseDTO(Dream dream) {
         // 1. Atribuições Básicas
@@ -26,9 +28,9 @@ public class DreamResponseDTO {
         this.goalValue = dream.getGoalValue();
         this.createdAt = dream.getCreatedAt();
 
-        // 2. O PULO DO GATO: Tratamento de NULL
-        // Se o sonho é novo e o banco devolver null no currentAmount,
-        // a gente usa BigDecimal.ZERO para não quebrar a conta abaixo.
+        // 2. ATRIBUIÇÃO DA CATEGORIA
+        // Adicionamos um tratamento simples para não vir nulo caso o banco esteja antigo
+        this.category = (dream.getCategory() != null) ? dream.getCategory() : Category.OUTROS;
         this.currentAmount = (dream.getCurrentAmount() != null) ? dream.getCurrentAmount() : BigDecimal.ZERO;
 
         // 3. Nome do Criador

@@ -4,7 +4,7 @@ import com.pitchbridge.api.model.Dream;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
+import com.pitchbridge.api.model.Category;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -15,6 +15,8 @@ public interface DreamRepository extends JpaRepository<Dream, Long> {
 
     // Busca os sonhos que já arrecadaram algo, ordenados pelo que tem mais dinheiro
     List<Dream> findTop5ByOrderByCurrentAmountDesc();
+
+    List<Dream> findByCategory(Category category);
     @Query("SELECT SUM(d.currentAmount) FROM Dream d")
     BigDecimal sumAllCurrentAmounts();
 }

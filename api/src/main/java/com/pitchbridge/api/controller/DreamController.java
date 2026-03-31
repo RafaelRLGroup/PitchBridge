@@ -7,7 +7,7 @@ import com.pitchbridge.api.service.DreamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.pitchbridge.api.model.Category;
 import java.util.List;
 
 @RestController
@@ -42,5 +42,14 @@ public class DreamController {
     @GetMapping("/stats")
     public ResponseEntity<PlatformReportDTO> getStats() {
         return ResponseEntity.ok(dreamService.getPlatformReport());
-}
+    }
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<DreamResponseDTO>> getByCategory(@PathVariable Category category) {
+        // Chama o serviço passando a categoria recebida na URL
+        List<DreamResponseDTO> dreams = dreamService.findByCategory(category);
+
+        return ResponseEntity.ok(dreams);
+    }
+
 }

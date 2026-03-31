@@ -14,7 +14,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class) // <-- Adicione isso aqui!
+@Table(name = "tb_dreams")
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,4 +50,8 @@ public class Dream {
         if (this.currentAmount == null) this.currentAmount = BigDecimal.ZERO;
         this.currentAmount = this.currentAmount.add(amount);
     }
+
+    @Enumerated(EnumType.STRING) // IMPORTANTE: Salva o nome "TECNOLOGIA" e não o número 0
+    @Column(nullable = false)
+    private Category category;
 }

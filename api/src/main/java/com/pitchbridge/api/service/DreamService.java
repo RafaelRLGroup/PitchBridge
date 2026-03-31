@@ -9,7 +9,7 @@ import com.pitchbridge.api.repository.DreamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.pitchbridge.api.model.Category;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +36,12 @@ public class DreamService {
         if (totalArrecadado == null) totalArrecadado = BigDecimal.ZERO;
 
         return new PlatformReportDTO(totalDreams, totalContributions, totalArrecadado);
+    }
+
+    public List<DreamResponseDTO> findByCategory(Category category) {
+        return dreamRepository.findByCategory(category).stream()
+                .map(DreamResponseDTO::new)
+                .toList();
     }
 
     @Transactional(readOnly = true)

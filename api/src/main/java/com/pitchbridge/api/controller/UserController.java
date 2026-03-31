@@ -46,11 +46,13 @@ public class UserController {
     }
 
     // 4. Atualizar Usuário
-    @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        User updatedUser = userService.update(id, userDetails);
-        return ResponseEntity.ok(new UserResponseDTO(updatedUser));
-    }
+        @PutMapping("/{id}")
+        public ResponseEntity<UserResponseDTO> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+            // O Service já devolve o DTO, então não precisamos converter aqui!
+            UserResponseDTO updatedUserDto = userService.update(id, userDetails);
+
+            return ResponseEntity.ok(updatedUserDto);
+        }
 
     // 5. Deletar Usuário
     @DeleteMapping("/{id}")
