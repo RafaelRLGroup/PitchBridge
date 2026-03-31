@@ -13,6 +13,7 @@ O projeto nasceu da necessidade real de organizar as vaquinhas do escritório, e
 ## 🛠️ Tecnologias Utilizadas
 
 * **Java 21** & **Spring Boot 3**
+* **Spring Security**: Criptografia de senhas com **BCrypt**.
 * **Spring Data JPA**: Persistência de dados simplificada.
 * **PostgreSQL**: Banco de dados relacional de alta performance.
 * **Jakarta Validation**: Blindagem contra dados inválidos.
@@ -23,12 +24,11 @@ O projeto nasceu da necessidade real de organizar as vaquinhas do escritório, e
 
 ## 🏗️ Arquitetura e Diferenciais Técnicos
 
-* **Padrão DTO (Data Transfer Object)**: Separação total entre as entidades do banco e a camada de apresentação, garantindo segurança e performance.
-* **Global Exception Handler**: Tratamento de erros centralizado com respostas amigáveis e padronizadas.
-* **JPA Auditing**: Registro automático de data e hora (`createdAt`) em todos os sonhos e doações.
-* **Inteligência de Dados**: Uso de Projections e Queries JPQL customizadas para cálculos de rankings e estatísticas em tempo real.
-* **Privacidade (LGPD)**: Suporte a doações anônimas, onde o nome do doador é mascarado na API.
-
+* **Segurança de Dados**: Implementação de Hashing com **BCrypt**, garantindo que as senhas nunca sejam armazenadas em texto puro.
+* **Categorização por Enums**: Organização de sonhos por categorias (Saúde, Educação, Tecnologia, Lazer, etc).
+* **Padrão DTO (Data Transfer Object)**: Separação total entre as entidades do banco e a camada de apresentação.
+* **Global Exception Handler**: Tratamento de erros centralizado com respostas amigáveis.
+* **JPA Auditing**: Registro automático de data e hora (`createdAt`) em todos os sonhos e doações com `@EnableJpaAuditing`.
 ---
 
 ## 📊 Endpoints Principais
@@ -37,7 +37,8 @@ O projeto nasceu da necessidade real de organizar as vaquinhas do escritório, e
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
 | `GET` | `/dreams` | Lista todos os sonhos com métricas (%, total doado). |
-| `POST` | `/dreams` | Cria um novo sonho vinculado a um usuário. |
+| `POST` | `/dreams` | Cria um novo sonho vinculado a um usuário e categoria. |
+| `GET` | `/dreams/category/{CAT}` | Filtra sonhos por categoria (Ex: LAZER, SAUDE). |
 | `GET` | `/dreams/search?title=coca` | Busca dinâmica por título (IgnoreCase). |
 | `GET` | `/dreams/stats` | **Dashboard:** Total de sonhos, doações e montante global. |
 
@@ -53,12 +54,12 @@ O projeto nasceu da necessidade real de organizar as vaquinhas do escritório, e
 ## 🧪 Guia de Testes (Exemplos de Body)
 
 ### 1. Criar Usuário (POST `/users`)
-
+> As senhas enviadas são automaticamente criptografadas antes de chegarem ao banco.
 ```json
 {
-  "name": "Adalbelto Carlos",
-  "email": "adalbelto@email.com",
-  "password": "senha123456"
+  "name": "Rosquineovaldo",
+  "email": "rosros@email.com",
+  "password": "senhaSegura123"
 }
 ```
 
@@ -66,10 +67,11 @@ O projeto nasceu da necessidade real de organizar as vaquinhas do escritório, e
 
 ```json
 {
-  "title": "Chácara do seu Zé",
-  "description": "Um refúgio para apreciar uma coquinha gelada.",
-  "goalValue": 50000.00,
-  "creator": { "id": 1 }
+  "title": "Banda de Rock do Adalbelto",
+  "description": "Comprar instrumentos para animar o escritório.",
+  "goalValue": 15000.00,
+  "category": "LAZER",
+  "creator": { "id": 5 }
 }
 ```
 
