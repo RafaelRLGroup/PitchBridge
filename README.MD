@@ -5,8 +5,8 @@
 
 ---
 
-## 🥤 O Primeiro Sonho: "A Coquinha Gelada do Adalbelto"
-O projeto nasceu da necessidade real de organizar as vaquinhas do escritório, evoluindo para uma API profissional capaz de gerenciar metas, percentuais de arrecadação e doações anônimas.
+## 🥤 O Primeiro Sonho: "A Coquinha Gelada do bigode"
+O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, evoluindo para uma API profissional capaz de gerenciar metas, percentuais de arrecadação e doações anônimas.
 
 ---
 
