@@ -105,9 +105,6 @@ O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, 
 5. Acesse a API em `http://localhost:8080`.
 
 ---
-
----
-
 ## 🤝 Conecte-se Comigo
 
 O **PitchBridge** é um projeto em evolução constante. Se você gostou da arquitetura ou da ideia:
@@ -118,6 +115,7 @@ O **PitchBridge** é um projeto em evolução constante. Se você gostou da arqu
 **Estou em busca da minha próxima oportunidade no mundo Dev!** Se você é recrutador ou desenvolvedor e quer trocar uma ideia sobre Java, Spring ou o futuro do financiamento coletivo, me chame no LinkedIn:
 
 [ ![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white) ](https://www.linkedin.com/in/rafael-simi%C3%A3o-pereira-b67108191/)
+---
 
 ## 👤 Autor
 **Rafael** / [@RafaelRLGroup](https://github.com/RafaelRLGroup)
