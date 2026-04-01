@@ -106,6 +106,19 @@ O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, 
 
 ---
 
+---
+
+## 🤝 Conecte-se Comigo
+
+O **PitchBridge** é um projeto em evolução constante. Se você gostou da arquitetura ou da ideia:
+
+* 🌟 **Dê uma estrela:** Isso ajuda muito na visibilidade do projeto!
+* 💬 **Feedback:** Tem alguma sugestão técnica ou de negócio? Abra uma [Issue](link-para-issues).
+
+**Estou em busca da minha próxima oportunidade no mundo Dev!** Se você é recrutador ou desenvolvedor e quer trocar uma ideia sobre Java, Spring ou o futuro do financiamento coletivo, me chame no LinkedIn:
+
+[ ![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white) ](SEU_LINK_DO_LINKEDIN)
+
 ## 👤 Autor
 **Rafael** / [@RafaelRLGroup](https://github.com/RafaelRLGroup)
 *"Codando até o 'zoio' fechar e o sorvete de pistache acabar."* 🍦🚀
