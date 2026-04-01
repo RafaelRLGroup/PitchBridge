@@ -1,5 +1,10 @@
 # 🚀 PitchBridge API
 
+![Java Version](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-brightgreen?style=for-the-badge&logo=spring-boot)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)
+
 > **Transformando sonhos em realidade, uma contribuição por vez.**
 > O PitchBridge é uma plataforma de financiamento coletivo (crowdfunding) construída para conectar sonhadores e investidores de forma transparente e robusta.
 
