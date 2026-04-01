@@ -1,5 +1,10 @@
 # 🚀 PitchBridge API
 
+![Java Version](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2-brightgreen?style=for-the-badge&logo=spring-boot)
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge&logo=gnu)
+![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)
+
 > **Transformando sonhos em realidade, uma contribuição por vez.**
 > O PitchBridge é uma plataforma de financiamento coletivo (crowdfunding) construída para conectar sonhadores e investidores de forma transparente e robusta.
 
@@ -99,6 +104,17 @@ O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, 
    ```
 5. Acesse a API em `http://localhost:8080`.
 
+---
+## 🤝 Conecte-se Comigo
+
+O **PitchBridge** é um projeto em evolução constante. Se você gostou da arquitetura ou da ideia:
+
+* 🌟 **Dê uma estrela:** Isso ajuda muito na visibilidade do projeto!
+* 💬 **Feedback:** Tem alguma sugestão técnica ou de negócio? Abra uma [Issue](https://github.com/RafaelRLGroup/PitchBridge/issues).
+
+**Estou em busca da minha próxima oportunidade no mundo Dev!** Se você é recrutador ou desenvolvedor e quer trocar uma ideia sobre Java, Spring ou o futuro do financiamento coletivo, me chame no LinkedIn:
+
+[ ![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white) ](https://www.linkedin.com/in/rafael-simi%C3%A3o-pereira-b67108191/)
 ---
 
 ## 👤 Autor
