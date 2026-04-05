@@ -17,13 +17,15 @@ O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, 
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Java 21** & **Spring Boot 3**
+* **Java 21** & **Spring Boot 3.4.1**
 * **Spring Security**: Criptografia de senhas com **BCrypt**.
 * **Spring Data JPA**: Persistência de dados simplificada.
 * **PostgreSQL**: Banco de dados relacional de alta performance.
 * **Jakarta Validation**: Blindagem contra dados inválidos.
 * **Lombok**: Código limpo e produtivo.
 * **Jackson**: Conversão elegante de Java para JSON.
+* **Maven**: Gerenciamento de Dependências Blindado.
+* **Hibernate**: Mapeamento ORM Avançado.
 
 ---
 
@@ -41,11 +43,12 @@ O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, 
 ### 🌟 Sonhos (Dreams)
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
-| `GET` | `/dreams` | Lista todos os sonhos com métricas (%, total doado). |
-| `POST` | `/dreams` | Cria um novo sonho vinculado a um usuário e categoria. |
-| `GET` | `/dreams/category/{CAT}` | Filtra sonhos por categoria (Ex: LAZER, SAUDE). |
-| `GET` | `/dreams/search?title=coca` | Busca dinâmica por título (IgnoreCase). |
-| `GET` | `/dreams/stats` | **Dashboard:** Total de sonhos, doações e montante global. |
+| `GET` | `/dreams` | `page, size, sort` | Lista sonhos com métricas e progresso. |
+| `GET` | `/dreams/{id}` | - | Detalhes individuais de um sonho. |
+| `GET` | `/dreams/search` | `title, page, size` | Busca dinâmica por título (Case Insensitive). |
+| `GET` | `/dreams/stats` | - | Dashboard global da plataforma. |
+| `POST` | `/dreams` | Cria um novo sonho. |
+
 
 ### 💸 Contribuições (Contributions)
 | Método | Endpoint | Descrição |
@@ -95,14 +98,15 @@ O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, 
 
 ## 🚀 Como Executar
 
-1. Clone o repositório.
-2. Configure o banco PostgreSQL no `application.properties`.
-3. Certifique-se de que a coluna `created_at` está presente ou use `ddl-auto=update`.
-4. Execute o comando:
-   ```bash
-   ./mvnw clean compile spring-boot:run
-   ```
-5. Acesse a API em `http://localhost:8080`.
+## 🚀 Como Rodar o Legado
+
+1.  Clone o repositório.
+2.  Configure sua variável de ambiente `DB_PASSWORD` (ou ajuste no `launch.json`).
+3.  O banco será estruturado automaticamente pelo Hibernate (`ddl-auto=update`).
+4.  Execute via terminal:
+    ```bash
+    ./mvnw clean compile spring-boot:run
+    ```
 
 ---
 ## 🤝 Conecte-se Comigo
