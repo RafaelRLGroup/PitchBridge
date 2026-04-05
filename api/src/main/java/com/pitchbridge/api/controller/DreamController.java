@@ -1,13 +1,21 @@
 package com.pitchbridge.api.controller;
 
+import com.pitchbridge.api.dto.ContributionResponseDTO;
 import com.pitchbridge.api.dto.DreamResponseDTO;
 import com.pitchbridge.api.dto.PlatformReportDTO;
 import com.pitchbridge.api.model.Dream;
+import com.pitchbridge.api.service.ContributionService;
 import com.pitchbridge.api.service.DreamService;
+import com.pitchbridge.api.model.Category;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.pitchbridge.api.model.Category;
+
 import java.util.List;
 
 @RestController
@@ -17,21 +25,32 @@ public class DreamController {
     @Autowired
     private DreamService dreamService;
 
+    @Autowired // <-- FIX 1: OBRIGATÓRIO PARA O SERVIÇO FUNCIONAR
+    private ContributionService contributionService;
+
     @GetMapping
-    public ResponseEntity<List<DreamResponseDTO>> getAllDreams() {
-        // O Service já entrega a lista de DTOs prontinha!
-        List<DreamResponseDTO> dtos = dreamService.findAll();
-        return ResponseEntity.ok(dtos);
+    public ResponseEntity<Page<DreamResponseDTO>> getAllDreams(
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(dreamService.findAll(pageable));
     }
 
     @PostMapping
     public ResponseEntity<DreamResponseDTO> createDream(@RequestBody Dream dream) {
-        // O Service agora já devolve o DTO prontinho!
         return ResponseEntity.ok(dreamService.save(dream));
-}
+    }
+
     @GetMapping("/search")
-    public ResponseEntity<List<DreamResponseDTO>> search(@RequestParam String title) {
-        return ResponseEntity.ok(dreamService.searchByTitle(title));
+    public ResponseEntity<Page<DreamResponseDTO>> search(
+            @RequestParam String title,
+            @PageableDefault(size = 10) Pageable pageable) {
+        return ResponseEntity.ok(dreamService.searchByTitle(title, pageable));
+    }
+
+    @GetMapping("/category/{category}")
+    public ResponseEntity<Page<DreamResponseDTO>> getByCategory(
+            @PathVariable Category category,
+            @PageableDefault(size = 10) Pageable pageable) {
+        return ResponseEntity.ok(dreamService.findByCategory(category, pageable));
     }
 
     @GetMapping("/trending")
@@ -44,12 +63,21 @@ public class DreamController {
         return ResponseEntity.ok(dreamService.getPlatformReport());
     }
 
-    @GetMapping("/category/{category}")
-    public ResponseEntity<List<DreamResponseDTO>> getByCategory(@PathVariable Category category) {
-        // Chama o serviço passando a categoria recebida na URL
-        List<DreamResponseDTO> dreams = dreamService.findByCategory(category);
+    // Mural de Gratidão Paginado
+    @GetMapping("/{id}/contributions")
+    public ResponseEntity<Page<ContributionResponseDTO>> getDreamMural(
+            @PathVariable Long id,
+            @PageableDefault(size = 5, sort = "donatedAt", direction = Sort.Direction.DESC) Pageable pageable) {
 
-        return ResponseEntity.ok(dreams);
+        // FIX 2: Adicionado 'return' e garantido o nome do método que criamos no Service
+        return ResponseEntity.ok(contributionService.findByDream(id, pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DreamResponseDTO> getById(@PathVariable Long id) {
+        // Chamamos o findById do service e convertemos para DTO
+        Dream dream = dreamService.findById(id);
+        return ResponseEntity.ok(new DreamResponseDTO(dream));
     }
 
 }

@@ -13,6 +13,8 @@ import com.pitchbridge.api.model.Category;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class DreamService {
@@ -38,28 +40,26 @@ public class DreamService {
         return new PlatformReportDTO(totalDreams, totalContributions, totalArrecadado);
     }
 
-    public List<DreamResponseDTO> findByCategory(Category category) {
-        return dreamRepository.findByCategory(category).stream()
-                .map(DreamResponseDTO::new)
-                .toList();
-    }
-
     @Transactional(readOnly = true)
-    public List<DreamResponseDTO> findAll() {
-        return dreamRepository.findAll()
-                .stream()
-                .map(DreamResponseDTO::new)
-                .collect(Collectors.toList());
+    public Page<DreamResponseDTO> findByCategory(Category category, Pageable pageable) {
+        return dreamRepository.findByCategory(category, pageable)
+                .map(DreamResponseDTO::new);
     }
 
+// O findAll você já tinha feito certinho! ✅
     @Transactional(readOnly = true)
-    public List<DreamResponseDTO> searchByTitle(String title) {
-        return dreamRepository.findByTitleContainingIgnoreCase(title)
-                .stream()
-                .map(DreamResponseDTO::new)
-                .collect(Collectors.toList());
+    public Page<DreamResponseDTO> findAll(Pageable pageable) {
+        return dreamRepository.findAll(pageable)
+                .map(DreamResponseDTO::new);
     }
 
+@Transactional(readOnly = true)
+    public Page<DreamResponseDTO> searchByTitle(String title, Pageable pageable) {
+        return dreamRepository.findByTitleContainingIgnoreCase(title, pageable)
+                .map(DreamResponseDTO::new);
+    }
+
+// getTrending continua List porque é um "Top 5" fixo. ✅
     @Transactional(readOnly = true)
     public List<DreamResponseDTO> getTrendingDreams() {
         return dreamRepository.findTop5ByOrderByCurrentAmountDesc()

@@ -11,6 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@Table(name = "tb_contributions")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 public class Contribution {

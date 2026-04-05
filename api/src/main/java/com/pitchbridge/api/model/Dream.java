@@ -46,10 +46,14 @@ public class Dream {
     private List<Contribution> contributions = new ArrayList<>();
 
     // Método auxiliar para facilitar a vida do Service
+
     public void addContribution(BigDecimal amount) {
-        if (this.currentAmount == null) this.currentAmount = BigDecimal.ZERO;
-        this.currentAmount = this.currentAmount.add(amount);
+    if (this.currentAmount == null) {
+        this.currentAmount = BigDecimal.ZERO;
     }
+    
+    this.currentAmount = this.currentAmount.add(amount);
+}
 
     @Enumerated(EnumType.STRING) // IMPORTANTE: Salva o nome "TECNOLOGIA" e não o número 0
     @Column(nullable = false)
