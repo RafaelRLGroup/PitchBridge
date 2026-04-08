@@ -36,7 +36,20 @@ O projeto nasceu da necessidade real de organizar as vaquinhas da manutenção, 
 * **Padrão DTO (Data Transfer Object)**: Separação total entre as entidades do banco e a camada de apresentação.
 * **Global Exception Handler**: Tratamento de erros centralizado com respostas amigáveis.
 * **JPA Auditing**: Registro automático de data e hora (`createdAt`) em todos os sonhos e doações com `@EnableJpaAuditing`.
+
 ---
+
+## 🔐 Segurança & Autenticação (JWT)
+
+A API agora utiliza um modelo de segurança **Stateless** com tokens **JWT (JSON Web Tokens)**:
+
+- **Registro**: As senhas são criptografadas com **BCrypt** antes de serem persistidas.
+- **Login**: O endpoint `/auth/login` valida as credenciais e retorna um Token de acesso.
+- **Autorização**: Endpoints sensíveis (como doações e criação de sonhos) exigem o cabeçalho `Authorization: Bearer <TOKEN>`.
+- **Proteção**: Tentativas de acesso sem token ou com token inválido resultam em `403 Forbidden`.
+
+---
+
 
 ## 📊 Endpoints Principais
 
